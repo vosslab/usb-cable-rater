@@ -11,3 +11,9 @@ sdist/
 *.egg
 *.egg-info/
 site/
+
+# === RUST ===
+/target/
+**/target/
+**/*.rs.bk
+.rust_analyzer/
