@@ -7,7 +7,6 @@ not shipped to consumers and not part of the fast pytest lane.
 | Script | Purpose |
 | --- | --- |
 | [bump_version.py](bump_version.py) | Bump or set the version across all version files |
-| [submit_to_pypi.py](submit_to_pypi.py) | Build, check, upload, and test-install a release |
 | [changelog_lib.py](changelog_lib.py) | Shared changelog parser, serializer, git and console helpers |
 | [commit_changelog.py](commit_changelog.py) | Draft a commit message from new changelog entries |
 | [query_changelog.py](query_changelog.py) | Search the changelog corpus by date, category, keyword |
@@ -55,69 +54,6 @@ pass `--apply` to write.
 | `update_version_py` | Rewrite version assignments in `version.py` |
 | `update_entry` | Read, transform, and optionally write one entry |
 | `main` | Discover, bump, and update version files |
-
-## submit_to_pypi.py
-
-Build and upload a package to PyPI or TestPyPI with pre-flight checks (clean
-tree, branch, tag, token, index reachability), `twine check`, and a
-temp-venv test install. Supports `--build-only` and setting the version
-before upload.
-
-Console and process helpers: `print_step`, `print_info`, `print_warning`,
-`print_error`, `fail`, `run_command`, `run_command_allow_fail`,
-`run_command_to_log`.
-
-| Function | Does |
-| --- | --- |
-| `parse_args` | Parse CLI args (`--test`/`--main`, `--repo`, `--build-only`, `--set-version`) |
-| `resolve_repo_root` | Find the repo root via git or script parent |
-| `resolve_pyproject_path` | Resolve and validate the `pyproject.toml` path |
-| `read_pyproject` | Load `pyproject.toml` into a dict |
-| `extract_project_metadata` | Pull package name and version from pyproject data |
-| `resolve_package_name` | Resolve package name; fail if missing |
-| `resolve_version` | Resolve version; fail if missing |
-| `resolve_import_name` | Resolve the import name from arg or package name |
-| `read_version_file` | Read the root VERSION file |
-| `verify_version_sync` | Ensure VERSION matches `pyproject.toml` |
-| `is_pypi_repo` | True if the target is production PyPI |
-| `resolve_index_url` | Resolve the index URL from the repo section |
-| `validate_version_string` | Ensure the version parses as PEP 440 |
-| `normalize_version_string` | Return the normalized PEP 440 version |
-| `read_requires_python` | Read `requires-python` from pyproject |
-| `require_python_version` | Ensure the running Python satisfies `requires-python` |
-| `require_git_clean` | Ensure no tracked changes |
-| `require_main_branch` | Ensure release is on the main branch |
-| `require_version_tag` | Ensure the version tag exists |
-| `require_twine_available` | Ensure twine is installed |
-| `extract_token_project_names` | Decode PyPI token macaroon for project names |
-| `resolve_pypirc_section` | Resolve a missing `.pypirc` section by match or prompt |
-| `require_pypirc_token` | Validate the `~/.pypirc` token and return creds |
-| `require_index_reachable` | Ensure the index URL responds |
-| `require_dist_empty` | Ensure `dist/` is empty after cleaning |
-| `require_editable_install_in_sync` | Ensure the editable install matches the repo version |
-| `require_pytest_passes_if_available` | Run pytest if installed |
-| `require_up_to_date_with_origin_main` | Ensure local main matches `origin/main` |
-| `update_version_files` | Update VERSION and `pyproject.toml` |
-| `has_tracked_changes` | True if git has tracked changes |
-| `commit_version_bump` | Commit a version bump if there are changes |
-| `tag_and_push_version` | Tag and push the version to origin |
-| `format_bytes` | Format byte counts for output |
-| `list_dist_files` | List files in `dist/` |
-| `show_dist_files` | Print dist files with sizes |
-| `clean_build_artifacts` | Remove build, dist, and egg-info artifacts |
-| `parse_pip_versions_output` | Parse `pip index versions` output |
-| `check_version_exists` | Check whether the version already exists on the index |
-| `verify_dist_contents` | Ensure `dist/` has both a wheel and an sdist |
-| `get_dist_args` | Return dist files as twine arguments |
-| `build_package` | Build the package |
-| `check_metadata` | Run `twine check` on artifacts |
-| `resolve_upload_url` | Resolve the upload URL from repo or `~/.pypirc` |
-| `upload_package` | Upload with twine (creds via environment) |
-| `get_venv_python` | Get the python executable in a venv |
-| `test_install` | Test-install in a temp venv with retry |
-| `resolve_project_url` | Build the project page URL |
-| `open_project_url` | Open the project URL in a browser |
-| `main` | Orchestrate build, upload, test install, and version set |
 
 ## changelog_lib.py
 
