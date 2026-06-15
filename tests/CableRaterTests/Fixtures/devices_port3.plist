@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- Synthetic attached-USB-device snapshot for the M5 device-speed floor fallback.
+     Built from constructed values modeling the IOUSBHostDevice nodes whatcable's
+     USBWatcher reads, paired to Port 3 via the XHCI subtree / UsbIOPort mapping.
+
+     Two USB3+ devices enumerate on Port 3 (a hub may expose several): a 10 Gbps
+     Super Speed+ device (Device Speed = 4) and a 5 Gbps Super Speed device
+     (Device Speed = 3). The fastest (10 Gbps) sets the cable floor, so Port 3
+     reads "At least 10G [device]".
+
+     Keys:
+       Device Speed : IOUSBHostDevice negotiated link speed enum
+                      (2 = High/USB2, 3 = 5 Gbps, 4 = 10 Gbps, 5 = 20 Gbps).
+       locationID   : bus/path word; upper byte is the XHCI controller bus index.
+       UsbIOPort    : the registry path of the first UsbIOPort ancestor in the XHCI
+                      subtree; its last component "Port-USB-C@3" names the physical
+                      port, the join key to the Port 3 controller's PortNumber = 3.
+       idVendor/idProduct : device VID/PID (informational; not used for the floor).
+-->
+<array>
+	<dict>
+		<key>Device Speed</key>
+		<integer>4</integer>
+		<key>locationID</key>
+		<integer>337641472</integer>
+		<key>idVendor</key>
+		<integer>1452</integer>
+		<key>idProduct</key>
+		<integer>4138</integer>
+		<key>UsbIOPort</key>
+		<string>IOService:/AppleARMPE/usb-drd0@/AppleT8103USBXHCI/usb-drd0-port-ss@/Port-USB-C@3</string>
+		<key>USB Product Name</key>
+		<string>USB3 Test Drive</string>
+	</dict>
+	<dict>
+		<key>Device Speed</key>
+		<integer>3</integer>
+		<key>locationID</key>
+		<integer>337645568</integer>
+		<key>idVendor</key>
+		<integer>1452</integer>
+		<key>idProduct</key>
+		<integer>4139</integer>
+		<key>UsbIOPort</key>
+		<string>IOService:/AppleARMPE/usb-drd0@/AppleT8103USBXHCI/usb-drd0-port-ss@/Port-USB-C@3</string>
+		<key>USB Product Name</key>
+		<string>USB3 Test Hub</string>
+	</dict>
+</array>
+</plist>

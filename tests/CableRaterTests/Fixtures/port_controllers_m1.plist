@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- M1 MacBook Pro port-controller snapshot, RAW captured shape.
+     Three AppleTCControllerType10 services, one per USB-C port, captured live
+     with `ioreg -r -c AppleTCControllerType10 -l -a`. Captured seed: Port 3 active
+     (ConnectionActive = Yes, IOAccessoryDetect = Yes, TransportsActive = ("CC"));
+     Ports 1 and 2 inactive.
+
+     This fixture is the REAL controller node shape -- the keys are copied verbatim
+     from the live ioreg dump, NOT hand-injected. The controller DOES publish
+     PortNumber, PortType (2 == USB-C), and PortTypeDescription ("USB-C"); the
+     registry entry name is "Port-USB-C" and the location is the "@N" suffix. The
+     large boot/firmware/data-register blobs and the AppleAuthCP / IOAccessoryManager
+     child services in the live dump are omitted: they are not read by the
+     port-state watcher or the real-port gate. Every key kept here is one the
+     watcher reads (operational keys), the gate inspects (PortTypeDescription,
+     IORegistryEntryName, IORegistryEntryLocation), or the coordinator joins on
+     (PortType, PortNumber).
+-->
+<array>
+	<dict>
+		<key>IOObjectClass</key>
+		<string>AppleTCControllerType10</string>
+		<key>IORegistryEntryName</key>
+		<string>Port-USB-C</string>
+		<key>IORegistryEntryLocation</key>
+		<string>1</string>
+		<key>Description</key>
+		<string>Port-USB-C@1</string>
+		<key>PortDescription</key>
+		<string>Port-USB-C@1</string>
+		<key>PortNumber</key>
+		<integer>1</integer>
+		<key>PortType</key>
+		<integer>2</integer>
+		<key>PortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ConnectionActive</key>
+		<false/>
+		<key>IOAccessoryDetect</key>
+		<false/>
+		<key>TransportsActive</key>
+		<array/>
+	</dict>
+	<dict>
+		<key>IOObjectClass</key>
+		<string>AppleTCControllerType10</string>
+		<key>IORegistryEntryName</key>
+		<string>Port-USB-C</string>
+		<key>IORegistryEntryLocation</key>
+		<string>2</string>
+		<key>Description</key>
+		<string>Port-USB-C@2</string>
+		<key>PortDescription</key>
+		<string>Port-USB-C@2</string>
+		<key>PortNumber</key>
+		<integer>2</integer>
+		<key>PortType</key>
+		<integer>2</integer>
+		<key>PortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ConnectionActive</key>
+		<false/>
+		<key>IOAccessoryDetect</key>
+		<false/>
+		<key>TransportsActive</key>
+		<array/>
+	</dict>
+	<dict>
+		<key>IOObjectClass</key>
+		<string>AppleTCControllerType10</string>
+		<key>IORegistryEntryName</key>
+		<string>Port-USB-C</string>
+		<key>IORegistryEntryLocation</key>
+		<string>3</string>
+		<key>Description</key>
+		<string>Port-USB-C@3</string>
+		<key>PortDescription</key>
+		<string>Port-USB-C@3</string>
+		<key>PortNumber</key>
+		<integer>3</integer>
+		<key>PortType</key>
+		<integer>2</integer>
+		<key>PortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ConnectionActive</key>
+		<true/>
+		<key>IOAccessoryDetect</key>
+		<true/>
+		<key>TransportsActive</key>
+		<array>
+			<string>CC</string>
+		</array>
+	</dict>
+</array>
+</plist>

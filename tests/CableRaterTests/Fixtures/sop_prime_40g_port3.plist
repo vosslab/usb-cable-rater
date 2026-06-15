@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- Synthetic SOP' (near-end cable e-marker) node for Port 3, with a POPULATED
+     Metadata dict carrying a real Cable VDO for a 20-40G cable.
+
+     Shape mirrors the live SOP node (sop_port3.plist) but:
+       - IOObjectClass is the SOP' class (CCUSBPDSOPp), so SOPEndpoint == .sopPrime.
+       - Metadata is populated with a VDOs array of 4 little-endian 4-byte Data blobs.
+
+     VDO[3] Cable VDO = 0x00002053 is the KNOWN-GOOD whatcable cross-check word:
+     whatcable Tests PDVDOTests.swift "Thunderbolt cable 5A 40Gbps" builds
+       0b011 | (1<<4) | (2<<5) | (1<<13) == 0x2053
+     and expects speed == .usb4Gen3 (Gen3 == 20-40 Gbps) and current == .fiveAmp.
+     Here speed bits 2..0 == 3 -> gen20to40g (PD revision unknown so the combined
+     bucket), current bits 6..5 == 2 (5A). Bit 4 set is Reserved for a passive
+     cable and does not affect speed/current decode.
+       VDO[0] ID Header = 0x180005AC: UFP=3 (passive), VID=0x05AC (Apple).
+       VDO[1], VDO[2]   = 0x00000000 (unused fillers).
+     PID = 0x720A (arbitrary, proves the VID/PID detail field renders).
+-->
+<array>
+	<dict>
+		<key>Address Description</key>
+		<string>SOP'</string>
+		<key>AddressDescription</key>
+		<string>SOP'</string>
+		<key>ComponentName</key>
+		<string>SOP'</string>
+		<key>Description</key>
+		<string>Port-USB-C@3/CC/SOP'</string>
+		<key>IOObjectClass</key>
+		<string>IOPortTransportComponentCCUSBPDSOPp</string>
+		<key>IORegistryEntryID</key>
+		<integer>4295494802</integer>
+		<key>IORegistryEntryName</key>
+		<string>SOP'</string>
+		<key>Metadata</key>
+		<dict>
+			<key>VID</key>
+			<integer>1452</integer>
+			<key>PID</key>
+			<integer>29194</integer>
+			<key>VDOs</key>
+			<array>
+				<data>rAUAGA==</data>
+				<data>AAAAAA==</data>
+				<data>AAAAAA==</data>
+				<data>UyAAAA==</data>
+			</array>
+		</dict>
+		<key>ParentBuiltInPortNumber</key>
+		<integer>3</integer>
+		<key>ParentBuiltInPortType</key>
+		<integer>2</integer>
+		<key>ParentBuiltInPortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ParentPortNumber</key>
+		<integer>3</integer>
+		<key>ParentPortType</key>
+		<integer>2</integer>
+		<key>ParentPortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ParentTransportType</key>
+		<integer>1</integer>
+		<key>ParentTransportTypeDescription</key>
+		<string>Port-USB-C@3/CC</string>
+		<key>Specification Revision</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>

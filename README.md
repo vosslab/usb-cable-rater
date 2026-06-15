@@ -1,14 +1,28 @@
 # usb-cable-rater
 
-Reads a plugged-in USB-C cable's e-marker over IOKit and reports its rated data-rate bucket (USB2, 5G, 10G, 20-40G, or 80G), updating live as you swap cables. Built to sort a bin of unlabeled USB-C cables by speed on macOS.
+Detects plugged-in USB-C cables live over IOKit and rates each by data-speed bucket (USB2, 5G, 10G, 20-40G, or 80G) from port state and PD identity, with a device-speed fallback. Built to identify and rate a bin of unlabeled USB-C cables on macOS.
 
 ## Status
 
-Early-stage. The Swift package skeleton is scaffolded; e-marker reading and live cable detection are still being implemented.
+Runnable. E-marker decoding, live cable detection, the rating verdict, and the
+text/JSON CLI are implemented. Default mode is a live watch that prints a calm
+two-line block per occupied port (a headline plus an indented detail line);
+`--once` enumerates current state and exits, and `--json` emits one
+machine-readable object per event for both modes. The M5 device-speed fallback
+reports an observed `At least <speed> [device]` floor when a far-end USB device
+enumerates over a no-e-marker cable. `--debug` (short `-d`) prints raw IOKit
+diagnostics to stderr so it never pollutes `--json` on stdout. On macOS, PD
+policy hides some e-markers; see [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md)
+for that limitation. See [docs/USAGE.md](docs/USAGE.md) for how to run it and
+interpret the buckets.
 
 ## Quick start
 
-This is a macOS-only Swift command-line tool. Build it with one of the bundled scripts:
+This is a macOS-only Swift command-line tool. No Homebrew or pip runtime
+dependency is needed; you only need a Swift toolchain to build it. See
+[docs/INSTALL.md](docs/INSTALL.md) for setup details.
+
+Build it with one of the bundled scripts:
 
 ```bash
 bash build_debug.sh
@@ -24,12 +38,14 @@ Both produce the `usb-cable-rater` binary.
 
 ## Documentation
 
+- [docs/USAGE.md](docs/USAGE.md): how to build, run, and read the output.
+- [docs/INSTALL.md](docs/INSTALL.md): toolchain requirements and build setup.
+- [docs/CODE_ARCHITECTURE.md](docs/CODE_ARCHITECTURE.md): high-level design and data flow.
+- [docs/FILE_STRUCTURE.md](docs/FILE_STRUCTURE.md): directory map of the SwiftPM package.
+- [docs/TROUBLESHOOTING.md](docs/TROUBLESHOOTING.md): known symptoms and the macOS PD limits behind them.
+- [docs/RELATED_PROJECTS.md](docs/RELATED_PROJECTS.md): upstream references such as whatcable.
+- [docs/TODO.md](docs/TODO.md): deferred backlog work captured at closeout.
 - [docs/CHANGELOG.md](docs/CHANGELOG.md): chronological record of changes.
-- [docs/REPO_STYLE.md](docs/REPO_STYLE.md): repo-level organization and conventions.
-- [docs/PYTHON_STYLE.md](docs/PYTHON_STYLE.md): Python formatting and conventions for tooling.
-- [docs/PYTEST_STYLE.md](docs/PYTEST_STYLE.md): pytest test-writing rules and commands.
-- [docs/E2E_TESTS.md](docs/E2E_TESTS.md): end-to-end testing conventions.
-- [docs/MARKDOWN_STYLE.md](docs/MARKDOWN_STYLE.md): Markdown writing rules for this repo.
 
 ## License
 

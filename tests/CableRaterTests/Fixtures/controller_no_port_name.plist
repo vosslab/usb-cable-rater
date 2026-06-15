@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- Raw-shape AppleTCControllerType10 node WITHOUT a "Port-" registry name.
+     This is the hardware-reality variant the real-port gate must still recognize:
+     a known port-controller class with a resolvable PortNumber is a real USB-C port
+     even when its registry name does not start with "Port-" (a generation that names
+     the node differently). The PortNumber, PortType, and ConnectionActive are the
+     captured Port 3 shape; only the name is changed away from "Port-USB-C". The gate
+     keeps the "Port-" name as a hard filter ONLY for the broad IOPort catch-all, so a
+     named controller is still admitted by class identity plus its PortNumber.
+-->
+<array>
+	<dict>
+		<key>IOObjectClass</key>
+		<string>AppleTCControllerType10</string>
+		<key>IORegistryEntryName</key>
+		<string>USB-C Port</string>
+		<key>IORegistryEntryLocation</key>
+		<string>3</string>
+		<key>PortNumber</key>
+		<integer>3</integer>
+		<key>PortType</key>
+		<integer>2</integer>
+		<key>ConnectionActive</key>
+		<true/>
+		<key>IOAccessoryDetect</key>
+		<true/>
+		<key>TransportsActive</key>
+		<array>
+			<string>CC</string>
+		</array>
+	</dict>
+</array>
+</plist>

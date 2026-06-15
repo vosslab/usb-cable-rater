@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<!-- SOP node for Port 3, captured from M1 MacBook Pro.
+     Key names copied verbatim from /tmp/sop_node.plist (live IOKit probe).
+     Metadata is an empty dict: this cable has no readable e-marker (non-e-marked cable).
+     ParentPortNumber = 3 correlates this SOP service to the Port 3 controller.
+-->
+<array>
+	<dict>
+		<key>Address</key>
+		<integer>1</integer>
+		<key>Address Description</key>
+		<string>SOP</string>
+		<key>AddressDescription</key>
+		<string>SOP</string>
+		<key>ComponentName</key>
+		<string>SOP</string>
+		<key>Description</key>
+		<string>Port-USB-C@3/CC/SOP</string>
+		<key>IOObjectClass</key>
+		<string>IOPortTransportComponentCCUSBPDSOP</string>
+		<key>IOObjectRetainCount</key>
+		<integer>8</integer>
+		<key>IORegistryEntryID</key>
+		<integer>4295494713</integer>
+		<key>IORegistryEntryName</key>
+		<string>SOP</string>
+		<key>IOServiceBusyState</key>
+		<integer>0</integer>
+		<key>IOServiceBusyTime</key>
+		<integer>11333250</integer>
+		<key>IOServiceState</key>
+		<integer>30</integer>
+		<key>Metadata</key>
+		<dict/>
+		<key>ParentBuiltInPortNumber</key>
+		<integer>3</integer>
+		<key>ParentBuiltInPortType</key>
+		<integer>2</integer>
+		<key>ParentBuiltInPortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ParentPortNumber</key>
+		<integer>3</integer>
+		<key>ParentPortType</key>
+		<integer>2</integer>
+		<key>ParentPortTypeDescription</key>
+		<string>USB-C</string>
+		<key>ParentTransportType</key>
+		<integer>1</integer>
+		<key>ParentTransportTypeDescription</key>
+		<string>Port-USB-C@3/CC</string>
+		<key>Specification Revision</key>
+		<integer>3</integer>
+	</dict>
+</array>
+</plist>

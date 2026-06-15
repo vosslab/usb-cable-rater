@@ -1,3 +1,9 @@
+# === SWIFT ===
+.build/
+*.o
+*.d
+*.swp
+
 # === UNIVERSAL ===
 .DS_Store
 report_*.txt
